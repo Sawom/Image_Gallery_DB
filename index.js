@@ -17,7 +17,16 @@ const client = new MongoClient(uri, { serverApi: {version: ServerApiVersion.v1, 
 async function run(){
     try{
         await client.connect();
-        console.log('connected successfully!');
+        
+        // collection
+        const imageCollection = client.db('ImageGallery').collection('imgdata');
+
+        // get all image api
+        app.get('/imgdata', async(req, res)=>{
+            const result = await imageCollection.find().toArray();
+            res.send(result);
+        })
+
     }
     finally{
 
