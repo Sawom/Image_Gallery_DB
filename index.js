@@ -27,6 +27,13 @@ async function run(){
             res.send(result);
         })
 
+        // add images
+        app.post('/imgdata', async(req,res)=>{
+            const newImage = req.body;
+            const result = await imageCollection.insertOne(newImage);
+            res.send(result);
+        })
+
     }
     finally{
 
