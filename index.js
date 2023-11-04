@@ -18,7 +18,7 @@ async function run(){
     try{
         await client.connect();
         
-        // collection
+        // image collection
         const imageCollection = client.db('ImageGallery').collection('imgdata');
 
         // get all image api
@@ -27,14 +27,14 @@ async function run(){
             res.send(result);
         })
 
-        // add images
+        // add images api
         app.post('/imgdata', async(req, res)=>{
             const newImage = req.body;
             const result = await imageCollection.insertOne(newImage);
             res.send(result);
         })
 
-        // delete images
+        // delete images api
         app.delete('/imgdata/:id', async(req, res)=>{
             const id = req.params.id;
             const deleteResult = await imageCollection.deleteMany({ _id: new ObjectId(id) })
